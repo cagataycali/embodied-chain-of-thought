@@ -33,6 +33,28 @@ The frame these reference is computed by the binding rules above. This avoids
 duplicating bytes already present in the mp4 and preserves the video↔reasoning
 join.
 
+## `action_age` — the transition-frame filter (recommended)
+
+Commanded actions are *sampled* by the dense recorder, not interpolated. The
+frame immediately after a motion tool returns may still read the move's action
+until the STOP command propagates (~one frame at low fps). To let trainers
+detect and discard these smeared boundary frames, the recorder SHOULD log a
+per-frame scalar:
+
+```
+action_age = wall_ts_frame − wall_ts_when_action_was_commanded   # seconds
+```
+
+- `action_age ≈ 0` → fresh command, the rover is actively executing it →
+  clean training frame.
+- `action_age` large → idle or post-motion transition → filter or down-weight.
+
+It is stored as a normal LeRobot feature (`dtype: float32`, shape `(1,)`,
+names `["seconds"]`), written every frame alongside `action` and
+`observation.state`. The rover's measured `observation.state.speed` remains the
+continuous ground truth; `action_age` simply flags when the *commanded* action
+and the *observed* motion may diverge.
+
 ## Write-time vs export-time
 - If an episode is recording at emit time → `frame_index` filled immediately.
 - If ambient (no episode) → `frame_index = NULL`; the exporter reconciles later

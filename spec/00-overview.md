@@ -38,3 +38,6 @@ frame_index = round((T − start_e) × fps)
 4. **Best-effort.** A logging failure MUST NOT raise into the driving agent.
 5. **Reconcilable.** Events emitted with no active episode (`episode_index =
    NULL`) MUST be reconcilable at export time against `episode_anchors`.
+6. **Action provenance.** The recorder SHOULD log per-frame `action_age` so
+   consumers can distinguish actively-commanded frames from idle/transition
+   ones (see §2).

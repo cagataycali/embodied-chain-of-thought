@@ -9,6 +9,8 @@ An implementation is **ECoT v0.1 conformant** if:
 - [ ] Computes `frame_index` per §2 when an episode is active; emits `NULL`
       otherwise.
 - [ ] Emits `frame_span_lo/hi` for span tools (motion) per §2.
+- [ ] SHOULD log per-frame `action_age` (seconds since the command was issued)
+      so transition/smeared frames are filterable (§2).
 - [ ] Stores images as references (§2), never base64.
 - [ ] Never raises into the driving agent on logging failure.
 - [ ] Records per-session context (system prompt + tool specs + model_id).
