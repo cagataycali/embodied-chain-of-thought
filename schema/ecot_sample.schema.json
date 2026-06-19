@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cagataycali/embodied-chain-of-thought/schema/ecot_sample.schema.json",
+  "title": "ECoT Training Sample",
+  "type": "object",
+  "required": ["episode_index", "messages"],
+  "properties": {
+    "episode_index": {"type": ["integer", "null"]},
+    "repo_id": {"type": "string"},
+    "fps": {"type": ["number", "null"]},
+    "task": {"type": "string"},
+    "model_id": {"type": "string"},
+    "system": {"type": "string"},
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "input_schema": {"type": "object"}
+        }
+      }
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role"],
+        "properties": {
+          "role": {"enum": ["system", "user", "assistant", "tool"]},
+          "content": {"type": "string"},
+          "tool_call_id": {"type": "string"},
+          "tool_calls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "type", "function"],
+              "properties": {
+                "id": {"type": "string"},
+                "type": {"const": "function"},
+                "function": {
+                  "type": "object",
+                  "required": ["name", "arguments"],
+                  "properties": {
+                    "name": {"type": "string"},
+                    "arguments": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "_meta": {
+            "type": "object",
+            "properties": {
+              "agent_id": {"type": "string"},
+              "frame_index": {"type": ["integer", "null"]},
+              "t": {"type": ["number", "null"]},
+              "frame_span": {
+                "type": "array",
+                "items": {"type": "integer"},
+                "minItems": 2, "maxItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "action_chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tool_use_id", "frames"],
+        "properties": {
+          "tool_use_id": {"type": "string"},
+          "frames": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+          "actions": {"type": ["array", "null"]},
+          "note": {"type": "string"}
+        }
+      }
+    }
+  }
+}
