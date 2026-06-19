@@ -49,6 +49,7 @@ spec/           # the normative specification (versioned)
   03-multi-agent.md
   04-chatml-view.md
   05-conformance.md
+  06-memory-layer.md       # OPTIONAL multimodal recall index (CLIP/YOLO/ASR)
 schema/         # machine-readable schemas
   reasoning_events.sql      # canonical SQLite schema (WAL, multi-writer)
   ecot_sample.schema.json   # JSON Schema for an ECoT training sample
