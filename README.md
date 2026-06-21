@@ -1,4 +1,4 @@
-# 🧠🤖 Embodied Chain-of-Thought (ECoT)
+# Embodied Chain-of-Thought (ECoT)
 
 > Capture not just *what* a robot did (VLA: vision→action) but *why* it
 > decided to — the language reasoning + tool calls of the agent(s) driving it —
