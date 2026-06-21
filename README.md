@@ -69,7 +69,7 @@ examples/
 ## Status
 
 `spec v0.1` — draft. Reference implementation lives in
-[`earth-rover-mini`](https://github.com/cagataycali/earth-rover-mini)
+[`scout-the-rover`](https://github.com/cagataycali/scout-the-rover)
 (`tools/reasoning_log.py` writer + `tools/ecot_export.py` exporter).
 
 ## License
